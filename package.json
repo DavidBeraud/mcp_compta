@@ -1,0 +1,52 @@
+{
+  "name": "@mcp-compta/accounting-core-fr",
+  "version": "1.0.2",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.15.0",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "files": ["dist/src", "dist/registry.json", "prisma", "README.md"],
+  "exports": { ".": "./dist/src/index.js", "./core": "./dist/src/core-entry.js", "./sdk": "./dist/src/sdk/index.js" },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run",
+    "lint": "eslint .",
+    "dev:api": "tsx src/api/server.ts",
+    "dev:mcp": "tsx src/mcp/server.ts",
+    "example": "tsx examples/basic.ts",
+    "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate deploy",
+    "prepack": "npm run build"
+  },
+  "dependencies": {
+    "decimal.js": "^10.6.0"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "@prisma/client": "^6.14.0",
+    "fastify": "^5.5.0",
+    "zod": "^3.25.76"
+  },
+  "peerDependenciesMeta": {
+    "@modelcontextprotocol/sdk": { "optional": true },
+    "@prisma/client": { "optional": true },
+    "fastify": { "optional": true },
+    "zod": { "optional": true }
+  },
+  "devDependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "@prisma/client": "^6.14.0",
+    "@eslint/js": "^9.34.0",
+    "@types/node": "^22.18.0",
+    "eslint": "^9.34.0",
+    "fastify": "^5.5.0",
+    "prisma": "^6.14.0",
+    "tsx": "^4.20.5",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0",
+    "vitest": "^3.2.4",
+    "zod": "^3.25.76"
+  }
+}

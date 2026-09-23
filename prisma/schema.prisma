@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model IssuedDocument {
+  id             String   @id
+  legalEntityId  String
+  number         String
+  series         String
+  documentType   String
+  issueDate      DateTime
+  snapshot       Json
+  ruleVersions   Json
+  idempotencyKey String   @unique
+  createdAt      DateTime @default(now())
+  @@unique([legalEntityId, series, number])
+}
+
+model AuditEvent {
+  id             String   @id @default(uuid())
+  actorId        String
+  action         String
+  entityId       String
+  idempotencyKey String   @unique
+  previousState  Json?
+  newState       Json
+  ruleVersions   Json
+  input          Json
+  output         Json
+  occurredAt     DateTime @default(now())
+  @@index([entityId, occurredAt])
+}
+
+model PaymentAllocation {
+  id             String   @id @default(uuid())
+  paymentId      String
+  invoiceId      String
+  amount         Decimal  @db.Decimal(19, 2)
+  idempotencyKey String   @unique
+  createdAt      DateTime @default(now())
+  @@index([paymentId])
+  @@index([invoiceId])
+}
+
+model ValidatedProgress {
+  id                String   @id
+  contractId        String
+  sequence          Int
+  currentCumulative Decimal  @db.Decimal(19, 2)
+  lineCumulatives   Json?
+  ruleVersions      Json
+  validatedAt       DateTime @default(now())
+  @@unique([contractId, sequence])
+}

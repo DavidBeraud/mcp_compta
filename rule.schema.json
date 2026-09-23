@@ -1,0 +1,112 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "FR Accounting Rule",
+  "type": "object",
+  "required": [
+    "id",
+    "version",
+    "jurisdiction",
+    "module",
+    "title",
+    "nature",
+    "severity",
+    "effective_from",
+    "status",
+    "applies_if",
+    "validation",
+    "effect",
+    "source"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^FR\\.[A-Z0-9_.]+$"
+    },
+    "version": {
+      "type": "string"
+    },
+    "jurisdiction": {
+      "const": "FR"
+    },
+    "module": {
+      "enum": [
+        "FR_GENERAL",
+        "FR_BTP",
+        "FR_BTP_PUBLIC"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "nature": {
+      "enum": [
+        "LEGAL",
+        "TAX",
+        "ACCOUNTING",
+        "CONTRACTUAL",
+        "BUSINESS_CONTROL",
+        "TECHNICAL",
+        "CALCULATION"
+      ]
+    },
+    "severity": {
+      "enum": [
+        "BLOCKING",
+        "WARNING",
+        "INFO"
+      ]
+    },
+    "effective_from": {
+      "type": "string",
+      "format": "date"
+    },
+    "effective_to": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "enum": [
+        "ACTIVE",
+        "FUTURE",
+        "DEPRECATED"
+      ]
+    },
+    "legal_review_required": {
+      "type": "boolean"
+    },
+    "applies_if": {
+      "type": "string"
+    },
+    "validation": {
+      "type": "string"
+    },
+    "effect": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "required": [
+        "authority",
+        "title",
+        "url"
+      ],
+      "properties": {
+        "authority": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "uri"
+        }
+      }
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}
