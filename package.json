@@ -1,12 +1,13 @@
 {
   "name": "@mcp-compta/accounting-core-fr",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
   "packageManager": "pnpm@10.15.0",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
   "files": ["dist/src", "dist/registry.json", "prisma", "README.md"],
+  "bin": { "accounting-core-fr-mcp": "./dist/src/mcp/http-server.js" },
   "exports": { ".": "./dist/src/index.js", "./core": "./dist/src/core-entry.js", "./sdk": "./dist/src/sdk/index.js" },
   "scripts": {
     "build": "tsc -p tsconfig.json",
@@ -15,6 +16,8 @@
     "lint": "eslint .",
     "dev:api": "tsx src/api/server.ts",
     "dev:mcp": "tsx src/mcp/server.ts",
+    "mcp:http": "node dist/src/mcp/http-server.js",
+    "dev:mcp:http": "tsx src/mcp/http-server.ts",
     "example": "tsx examples/basic.ts",
     "db:generate": "prisma generate",
     "db:migrate": "prisma migrate deploy",

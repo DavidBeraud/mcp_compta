@@ -61,6 +61,8 @@ Toute réponse financière contient `result`, `calculations`, `validations`, `ru
 
 ## SDK et MCP
 
+Pour ATLAS, compiler avec `corepack pnpm build`, definir `ATLAS_COMPTA_MCP_TOKEN` (au moins 32 caracteres), puis lancer `corepack pnpm mcp:http`. Le serveur Streamable HTTP ecoute exclusivement sur `127.0.0.1:8766` ; `GET /healthz` expose son nom et sa version, tandis que `/mcp` exige `Authorization: Bearer <token>`. Il n'active pas CORS et n'est pas accessible depuis le LAN. `corepack pnpm dev:mcp` conserve le transport stdio.
+
 ```ts
 import { createAccountingClient } from '@mcp-compta/accounting-core-fr/sdk';
 
